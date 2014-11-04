@@ -1,9 +1,16 @@
 <%= subscribe_to "/change_user_rate/change" %>
-<div class="update"></div>
+<table border="1" width="200px">
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.name %></td>
+      <td data-user_id="<%= user.id %>"><%= user.total_points %></td>
+    </tr>
+  <% end %>
+</table>
 
 <script>
     PrivatePub.subscribe("/change_user_rate/change", function(data, channel) {
-        $('.update').html(data.chat_message);
+        $('[data-user_id='+data.user_id+']').html(data.user_total);
     });
 </script>
 
