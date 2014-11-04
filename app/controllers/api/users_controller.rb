@@ -5,7 +5,7 @@ module Api
 
 
     def change_rate
-      if @user.update!(user_params)
+      if @user.update!(user_points_params)
         PrivatePub.publish_to "/change_user_rate/change", {user_id: @user.id, user_total: @user.total_points}
         render nothing: true #возвращаем 200 статус если все ок
       else
@@ -24,8 +24,6 @@ module Api
     end
 
 
-
-
   private
 
     def show_errors
@@ -33,11 +31,14 @@ module Api
     end
 
     def user_params
+      params.require(:user).permit(:name)
+    end
+
+
+
+    def user_points_params
       params.permit(:increase, :decrease)
     end
 
-    def query_params
-      params.permit(:id)
-    end
   end
 end

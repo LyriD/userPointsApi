@@ -75,7 +75,7 @@ module Api
     end
 
     def set_resource(resource = nil)
-      resource ||= resource_class.find(params[:id])
+      resource ||= resource_class.find_by_name(params[:id]) || resource_class.find(params[:id])
       instance_variable_set("@#{resource_name}", resource)
     end
   end

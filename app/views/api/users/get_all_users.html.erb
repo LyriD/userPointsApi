@@ -1,16 +1,34 @@
 <%= subscribe_to "/change_user_rate/change" %>
-<table border="1" width="200px">
-  <% @users.each do |user| %>
-    <tr>
-      <td><%= user.name %></td>
-      <td data-user_id="<%= user.id %>"><%= user.total_points %></td>
-    </tr>
-  <% end %>
-</table>
-
 <script>
     PrivatePub.subscribe("/change_user_rate/change", function(data, channel) {
         $('[data-user_id='+data.user_id+']').html(data.user_total);
     });
 </script>
+<script>
+  $(function(){
+      $.getJSON("http://0.0.0.0:3000/get_all_users",
+              function(data){
+                  $.each(data, function(i,item){
+                      $('.api').append('<tr><td>'+item.name+'</td><td data-user_id="'+item.id+'">'+item.total_points+'</td></tr>');
+                  });
+              });
+  });
+</script>
 
+<table class="api" border="1"></table>
+
+<%= form_tag('/change_rate', remote: true) do %>
+    <p>
+    <%= label_tag :id, 'Введите id или имя пользователя' %>
+    <%= text_field_tag :id %>
+    </p>
+    <p>
+    <%= label_tag :increase, 'Увеличить баллы пользователя на:' %>
+    <%= text_field_tag :increase %>
+    </p>
+    <p>
+    <%= label_tag :decrease, 'Уменьшить баллы пользователя на:' %>
+    <%= text_field_tag :decrease %>
+    </p>
+    <%= submit_tag :send %>
+<% end %>

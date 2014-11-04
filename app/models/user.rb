@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   end
 
   def decrease=(sum)
-    Transaction.create!(sum: -sum, user_id: self.id)
+    Transaction.create!(sum: -(sum.to_i), user_id: self.id)
   end
 
   def total_points

@@ -5,12 +5,12 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'api/base#index'
+  root 'api/users#get_all_users'
 
-  # Example of regular route:
   get 'change_rate/:id/:increase' => 'api/users#change_rate'
-  get 'user_data/:id/' => 'api/users#user_data'
-  get 'get_all_users/' => 'api/users#get_all_users'
+  post 'change_rate' => 'api/users#change_rate'
+  get 'user_data/(:id)' => 'api/users#user_data'
+  get 'get_all_users/' => 'api/users#get_all_users', as: :get_all_users
 
   namespace :api do
     resources :users
