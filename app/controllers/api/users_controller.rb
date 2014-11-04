@@ -6,6 +6,9 @@ module Api
 
     def change_rate
       if @user.update!(user_params)
+        PrivatePub.publish_to "/change_user_rate/change", :chat_message => "Hello, world!"
+        # PrivatePub.publish_to("/change_user_rate/change")
+
         render nothing: true #возвращаем 200 статус если все ок
       else
         render json: get_resource.errors, status: :unprocessable_entity
@@ -21,6 +24,8 @@ module Api
     def user_data
 
     end
+
+
 
 
   private

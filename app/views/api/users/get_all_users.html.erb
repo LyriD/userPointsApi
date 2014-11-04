@@ -1,0 +1,9 @@
+<%= subscribe_to "/change_user_rate/change" %>
+<div class="update"></div>
+
+<script>
+    PrivatePub.subscribe("/change_user_rate/change", function(data, channel) {
+        $('.update').html(data.chat_message);
+    });
+</script>
+
