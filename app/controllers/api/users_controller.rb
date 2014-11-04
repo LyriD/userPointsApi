@@ -36,5 +36,5 @@ module Api
     def query_params
       params.permit(:id)
     end
-end
+  end
 end

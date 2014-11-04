@@ -11,9 +11,7 @@ class User < ActiveRecord::Base
   end
 
   def total_points
-    total=0
-    self.transactions.each {|t| total+=t.sum}
-    total
+    Transaction.where(user_id: self.id).sum(:sum)
   end
 
 

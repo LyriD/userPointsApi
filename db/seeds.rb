@@ -7,9 +7,11 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 User.destroy_all
-puts 'User Seed start'
+Transaction.destroy_all
+puts 'User with transactions Seed start'
 100.times do
-  User.create!(
-      name: "#{Faker::Name.first_name} #{Faker::Name.last_name}",
-  )
+  id = User.create!(name: "#{Faker::Name.first_name} #{Faker::Name.last_name}").id
+  6.times do
+    Transaction.create!(sum: rand(100)-50, user_id: id)
+  end
 end
