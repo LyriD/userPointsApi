@@ -7,7 +7,7 @@ module Api
 
     def change_rate
       if @user.update!(user_points_params)
-        PrivatePub.publish_to "/change_user_rate/change", {user_id: @user.id, user_total: @user.total_points}
+        PrivatePub.publish_to "/change_user_rate/change", {user_id: @user.id, user_total: @user.total_points} unless Rails.env.test?
         render nothing: true #возвращаем 200 статус если все ок
       else
         render json: get_resource.errors, status: :unprocessable_entity
