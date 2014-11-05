@@ -6,7 +6,7 @@
 </script>
 <script>
   $(function(){
-      $.getJSON("http://0.0.0.0:3000/get_all_users",
+      $.getJSON("http://<%= request.host_with_port %>/get_all_users",
               function(data){
                   $.each(data, function(i,item){
                       $('.api').append('<tr><td>'+item.name+'</td><td data-user_id="'+item.id+'">'+item.total_points+'</td></tr>');
@@ -15,9 +15,9 @@
   });
 </script>
 
-<table class="api" border="1"></table>
+<table class="api table table-striped" border="1"></table>
 
-<%= form_tag('/change_rate', remote: true) do %>
+<%= form_tag('/change_rate', remote: true, class: 'form-inline') do %>
     <p>
     <%= label_tag :id, 'Введите id или имя пользователя' %>
     <%= text_field_tag :id %>

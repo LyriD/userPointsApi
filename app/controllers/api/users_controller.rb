@@ -1,7 +1,8 @@
 module Api
   class UsersController < Api::BaseController
     before_action :set_resource, only: [:change_rate, :user_data]
-    rescue_from ActiveRecord::RecordNotFound, :with => :show_errors
+    rescue_from ActiveRecord::RecordNotFound, :with => :not_found
+    rescue_from ActiveRecord::RecordInvalid, :with => :record_invalid
 
 
     def change_rate
@@ -26,8 +27,11 @@ module Api
 
   private
 
-    def show_errors
+    def not_found
       render text: 'Пользователь с запрашиваемым id не найден'
+    end
+    def record_invalid
+      render text: 'Входные данные не верны'
     end
 
     def user_params

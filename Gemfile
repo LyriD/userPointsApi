@@ -42,10 +42,14 @@ gem 'kaminari'
 gem 'private_pub'
 gem 'thin'
 
-group :development, :test do
+gem 'rspec-rails', '~> 3.0.1', group: [:development, :test]
+
+
+group :test do
   gem 'factory_girl_rails', '~> 4.4.1'
+  gem 'shoulda-matchers', '~> 2.6.2', require: false
+  # gem 'capybara', '~> 2.4.1'
   gem 'faker', '~> 1.3.0'
-  gem 'faker-russian', github: 'shir/faker-russian'
 end
 
 

@@ -1,13 +1,13 @@
 class User < ActiveRecord::Base
-
+  validates :name, presence: true
   has_many :transactions, dependent: :destroy
 
   def increase=(sum)
-    Transaction.create!(sum: sum, user_id: self.id)
+    self.transactions.create!(sum: sum)
   end
 
   def decrease=(sum)
-    Transaction.create!(sum: -(sum.to_i), user_id: self.id)
+    self.transactions.create!(sum: -(sum.to_i))
   end
 
   def total_points

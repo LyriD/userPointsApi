@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'api/users#get_all_users'
 
-  get 'change_rate/:id/:increase' => 'api/users#change_rate'
+  # get 'change_rate/:id/:increase' => 'api/users#change_rate'
   post 'change_rate' => 'api/users#change_rate'
   get 'user_data/(:id)' => 'api/users#user_data'
   get 'get_all_users/' => 'api/users#get_all_users', as: :get_all_users
