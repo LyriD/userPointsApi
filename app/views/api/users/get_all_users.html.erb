@@ -9,7 +9,7 @@
       $.getJSON("http://<%= request.host_with_port %>/get_all_users",
               function(data){
                   $.each(data, function(i,item){
-                      $('.api').append('<tr><td>'+item.name+'</td><td data-user_id="'+item.id+'">'+item.total_points+'</td></tr>');
+                      $('.api').append('<tr><td>id: '+item.id+'</td><td>'+item.name+'</td><td data-user_id="'+item.id+'">'+item.total_points+'</td></tr>');
                   });
               });
   });
